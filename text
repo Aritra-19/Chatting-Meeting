@@ -1,0 +1,4 @@
+next.js is a ssr. SSR means server side rendering.
+app folder layout.js is run in server side we can't change it.
+children is sending as a prop.
+metadata is use for SCO. Search Engine Optimization. it shows the tab title for my website.
