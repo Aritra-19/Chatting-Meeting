@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import Loader from "@/app/components/Loader";
 import Header from "@/app/components/Header";
+import { useRouter } from "next/navigation";
 import MeetingAction from "./components/MeetingAction";
 import MeetingFeature from "./components/MeetingFeature";
 import { toast } from "react-toastify";
@@ -10,6 +11,7 @@ import { toast } from "react-toastify";
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const { data: session, status } = useSession();
+  const router = useRouter();
 
   useEffect(() => {
     if (status === "authenticated") {
@@ -22,8 +24,9 @@ export default function Home() {
     } else if (status === "unauthenticated") {
       setIsLoading(false);
       toast.error("Please login to continue");
+      router.push("/user-auth");
     }
-  }, [status, session]);
+  }, [status, session, router]);
   if (isLoading) {
     return <Loader />
   }
