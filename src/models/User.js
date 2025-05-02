@@ -1,6 +1,5 @@
-//create a user model using mongoose
-// This model will be used to store user information in the database
 const mongoose = require("mongoose");
+
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -14,7 +13,8 @@ const userSchema = new mongoose.Schema({
   },
   isVerified: {
     type: Boolean,
-    required: true,
-  }
-},{timestamps:true}); //show timestamps in the document
-module.exports = mongoose.models.User || mongoose.model("User", userSchema); // Export the User model, creating it if it doesn't exist
+    default: true, // <- this avoids 500 errors if field missing
+  },
+}, { timestamps: true });
+
+module.exports = mongoose.models.User || mongoose.model("User", userSchema);
