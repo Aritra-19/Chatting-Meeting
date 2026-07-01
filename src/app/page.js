@@ -23,12 +23,18 @@ export default function Home() {
       }
     } else if (status === "unauthenticated") {
       setIsLoading(false);
-      toast.error("Please login to continue");
-      router.push("/user-auth");
+      router.replace("/user-auth");
+    } else {
+      setIsLoading(true);
     }
   }, [status, session, router]);
-  if (isLoading) {
-    return <Loader />
+
+  if (status === "loading" || isLoading) {
+    return <Loader />;
+  }
+
+  if (status === "unauthenticated") {
+    return null;
   }
   return (
     <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900">
